@@ -22,7 +22,7 @@ public:
       throw invalid_argument("column - Index out of range");
     }
 
-    return cols[cIdx];
+    return *(cols + cIdx);
   }
 };
 
@@ -48,9 +48,10 @@ public:
 
   Matrix(initializer_list<initializer_list<int>> arr)
   {
-
     rows = arr.size();
     cols = arr.begin()->size();
+
+    array = (Row *)malloc(sizeof(Row) * rows);
 
     for (int r = 0; r < rows; r++)
     {
@@ -106,7 +107,7 @@ int main()
       {6, 2, 3},
   };
 
-  cout << m1;
+  cout << m1 << endl;
 
   return 0;
 }
