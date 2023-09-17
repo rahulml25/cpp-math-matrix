@@ -38,7 +38,7 @@ public:
 
     for (int r = 0; r < rows; r++)
     {
-      *(array + r) = Row(cols);
+      array[r] = Row(cols);
       for (int c = 0; c < cols; c++)
       {
         array[r][c] = 0;
@@ -50,14 +50,7 @@ public:
   {
 
     rows = arr.size();
-    cols = 0;
-
-    if (rows > 0)
-    {
-      cols = arr.begin()->size();
-    }
-
-    Matrix(rows, cols);
+    cols = arr.begin()->size();
 
     for (int r = 0; r < rows; r++)
     {
@@ -68,9 +61,11 @@ public:
         sprintf(errorString, "Uneven row size: size extended from %d to %d columns", cols, newSize);
         throw invalid_argument(errorString);
       }
+
+      array[r] = Row(cols);
+
       for (int c = 0; c < cols; c++)
       {
-
         array[r][c] = arr.begin()[r].begin()[c];
       }
     }
@@ -84,7 +79,7 @@ public:
     {
       throw invalid_argument("row - Index out of range");
     }
-    return *(array + rIdx);
+    return array[rIdx];
   }
 };
 
