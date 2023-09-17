@@ -43,6 +43,12 @@
     "xstddef": "cpp",
     "xtr1common": "cpp",
     "vector": "cpp",
-    "format": "cpp"
+    "format": "cpp",
+    "*.tcc": "cpp",
+    "memory_resource": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp"
   }
 }
