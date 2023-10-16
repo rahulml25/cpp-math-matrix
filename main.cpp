@@ -116,6 +116,35 @@ public:
     return newMatrix;
   }
 
+  Matrix operator*(Matrix &otherMatrix)
+  {
+    char *errorMessage;
+
+    if (this->_rows != otherMatrix._cols)
+    {
+      sprintf(errorMessage, "multiplication between Matrix(%d,%d) and Matrix(%d,%d)", this->_rows, this->_cols, otherMatrix._rows, otherMatrix._rows);
+      throw invalid_argument(errorMessage);
+    }
+
+    const int rows = this->_rows, cols = otherMatrix._cols;
+    Matrix newMatrix(rows, cols);
+
+    for (int i = 0; i < otherMatrix._cols; i++)
+    {
+      for (int j = 0; j < this->_rows; j++)
+      {
+        int sum = 0;
+        for (int k = 0; k < this->_cols; k++)
+        {
+          sum += (*this)[j][k] * otherMatrix[k][i];
+        }
+        newMatrix[j][i] = sum;
+      }
+    }
+
+    return newMatrix;
+  }
+
   Row &operator[](int rIdx)
   {
     if (rIdx >= _rows)
@@ -150,13 +179,14 @@ int main()
   };
 
   Matrix m2 = {
-      {1, 2, 1},
+      {1, 2, 3},
       {2, 9, 0},
       {6, 2, 3},
   };
 
   cout << m1 + m2 << endl;
   cout << m1 - m2 << endl;
+  cout << m1 * m2 << endl;
 
   return 0;
 }
